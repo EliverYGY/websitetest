@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>First Australia–China Green Iron Technology Workshop 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F3EF;
+    --ink:#191C1E;
+    --steel:#525A61;
+    --line:#D8D5CD;
+    --rust:#B34E1D;
+    --green:#2E5F45;
+    --ember:#E7A33E;
+    --panel:#181B1D;
+    --panel-text:#F4F3EF;
+
+    --display:'Space Grotesk', sans-serif;
+    --body:'Inter', sans-serif;
+    --mono:'IBM Plex Mono', monospace;
+
+    --max:1200px;
+    --pad:clamp(20px,5vw,64px);
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--body);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{ max-width:100%; display:block; }
+  a{ color:inherit; }
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--rust); outline-offset:3px; }
+  @media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important; } }
+
+  .wrap{ max-width:var(--max); margin:0 auto; padding-left:var(--pad); padding-right:var(--pad); }
+  .eyebrow{
+    font-family:var(--mono); font-size:0.72rem; letter-spacing:0.14em;
+    text-transform:uppercase; color:var(--steel);
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{ content:''; width:18px; height:1px; background:var(--rust); }
+
+  /* Signature: the smelt gradient — rust (raw iron) transitioning to green (green iron) */
+  .smelt{
+    height:4px; width:100%;
+    background:linear-gradient(90deg, var(--rust) 0%, var(--ember) 45%, var(--green) 100%);
+  }
+
+  /* ---------- Nav ---------- */
+  .nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(244,243,239,0.9);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav__inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px var(--pad);
+    max-width:var(--max); margin:0 auto;
+  }
+  .nav__logo{ font-family:var(--display); font-weight:700; font-size:1rem; letter-spacing:-0.01em; }
+  .nav__logo span{ color:var(--rust); }
+  .nav__links{ display:flex; gap:28px; font-size:0.85rem; }
+  .nav__links a{ text-decoration:none; color:var(--steel); transition:color .15s; }
+  .nav__links a:hover{ color:var(--ink); }
+  .nav__cta{
+    font-family:var(--mono); font-size:0.78rem; text-decoration:none;
+    background:var(--ink); color:var(--bg); padding:9px 16px;
+  }
+  @media (max-width:820px){ .nav__links{ display:none; } }
+
+  /* ---------- Hero ---------- */
+  .hero{ position:relative; overflow:hidden; background:var(--panel); color:var(--panel-text); }
+  .hero__bg{
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(180deg, rgba(24,27,29,0.35) 0%, rgba(24,27,29,0.88) 75%, var(--panel) 100%),
+      url('https://images.unsplash.com/photo-1495837174058-628aafc7d610?auto=format&fit=crop&w=1800&q=80');
+    background-size:cover; background-position:center 65%;
+    opacity:0.85;
+  }
+  .hero__content{
+    position:relative; z-index:2; padding:clamp(72px,12vw,120px) var(--pad) clamp(56px,8vw,88px);
+    max-width:var(--max); margin:0 auto;
+  }
+  .hero__eyebrow{ color:var(--ember); }
+  .hero__eyebrow::before{ background:var(--ember); }
+  .hero h1{
+    font-family:var(--display); font-weight:700; font-size:clamp(2.1rem,5.2vw,3.6rem);
+    line-height:1.05; letter-spacing:-0.01em; max-width:20ch; margin-top:22px;
+  }
+  .hero__sub{ margin-top:20px; max-width:56ch; color:rgba(244,243,239,0.75); font-size:1.05rem; }
+  .hero__meta{
+    display:flex; flex-wrap:wrap; gap:28px; margin-top:40px;
+    font-family:var(--mono); font-size:0.85rem;
+  }
+  .hero__meta div{ display:flex; flex-direction:column; gap:4px; }
+  .hero__meta .label{ color:rgba(244,243,239,0.5); font-size:0.7rem; letter-spacing:0.08em; text-transform:uppercase; }
+  .hero__actions{ margin-top:40px; display:flex; gap:14px; flex-wrap:wrap; }
+  .btn{
+    font-family:var(--mono); font-size:0.82rem; text-decoration:none;
+    display:inline-flex; align-items:center; gap:8px;
+    padding:13px 20px; border:1px solid rgba(244,243,239,0.35);
+    transition:border-color .2s, background .2s;
+  }
+  .btn:hover{ border-color:var(--ember); background:rgba(231,163,62,0.1); }
+  .btn--solid{ background:var(--rust); border-color:var(--rust); }
+  .btn--solid:hover{ background:#9c4319; }
+
+  /* ---------- Section shell ---------- */
+  section{ padding:clamp(56px,9vw,100px) 0; }
+  .section-head{ max-width:60ch; margin-bottom:44px; }
+  .section-head h2{
+    font-family:var(--display); font-weight:600; font-size:clamp(1.6rem,3vw,2.2rem);
+    margin-top:14px; letter-spacing:-0.01em;
+  }
+  .section-head p{ margin-top:14px; color:var(--steel); }
+
+  /* ---------- Overview / Text+Image ---------- */
+  .overview{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:clamp(32px,6vw,72px); align-items:center; }
+  .overview__text p{ color:var(--steel); margin-top:16px; }
+  .overview__text p:first-of-type{ margin-top:20px; }
+  .overview__figure{ position:relative; }
+  .overview__figure img{ width:100%; aspect-ratio:4/5; object-fit:cover; }
+  .overview__tag{
+    position:absolute; bottom:-14px; left:-14px; background:var(--panel); color:var(--panel-text);
+    font-family:var(--mono); font-size:0.7rem; letter-spacing:0.06em; padding:8px 12px; border-left:3px solid var(--green);
+  }
+  @media (max-width:860px){ .overview{ grid-template-columns:1fr; } .overview__figure{ order:-1; } }
+
+  /* ---------- Program highlights ---------- */
+  .highlights{ display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+  .highlight-card{ border-top:2px solid var(--rust); padding-top:20px; }
+  .highlight-card .num{ font-family:var(--mono); font-size:0.75rem; color:var(--rust); }
+  .highlight-card h3{ font-family:var(--display); font-size:1.15rem; font-weight:600; margin-top:12px; }
+  .highlight-card p{ color:var(--steel); margin-top:10px; font-size:0.95rem; }
+  @media (max-width:820px){ .highlights{ grid-template-columns:1fr; } }
+
+  /* ---------- Key dates ---------- */
+  .dates-panel{ background:var(--panel); color:var(--panel-text); }
+  .dates-panel .section-head p{ color:rgba(244,243,239,0.6); }
+  .dates-panel .eyebrow{ color:var(--ember); }
+  .dates-panel .eyebrow::before{ background:var(--ember); }
+  .date-list{ border-top:1px solid rgba(244,243,239,0.15); }
+  .date-row{
+    display:flex; justify-content:space-between; align-items:baseline;
+    padding:18px 0; border-bottom:1px solid rgba(244,243,239,0.15);
+    gap:16px; flex-wrap:wrap;
+  }
+  .date-row .what{ font-size:0.98rem; }
+  .date-row .when{ font-family:var(--mono); font-size:0.9rem; color:var(--ember); white-space:nowrap; }
+
+  /* ---------- Programme timeline ---------- */
+  .programme{ }
+  .timeline{ border-top:1px solid var(--line); }
+  .t-row{
+    display:grid; grid-template-columns:110px 190px 1fr; gap:20px;
+    padding:20px 0; border-bottom:1px solid var(--line);
+  }
+  .t-row .time{ font-family:var(--mono); font-size:0.85rem; color:var(--rust); }
+  .t-row .session{ font-family:var(--display); font-weight:600; font-size:0.98rem; }
+  .t-row .details{ color:var(--steel); font-size:0.92rem; }
+  .t-row.highlight{ background:rgba(46,95,69,0.06); }
+  @media (max-width:720px){
+    .t-row{ grid-template-columns:1fr; gap:6px; }
+    .t-row .time{ order:0; }
+  }
+
+  /* ---------- Organisations ---------- */
+  .orgs{ }
+  .org-tiers{ display:grid; gap:28px; }
+  .org-tier{ border-top:1px solid var(--line); padding-top:18px; }
+  .org-tier .tier-label{ font-family:var(--mono); font-size:0.72rem; color:var(--steel); letter-spacing:0.1em; text-transform:uppercase; }
+  .org-tier .tier-names{ margin-top:10px; font-family:var(--display); font-size:1.05rem; font-weight:500; }
+
+  /* ---------- Speakers strip ---------- */
+  .speakers-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
+  .speaker{ text-align:left; }
+  .speaker img{ width:100%; aspect-ratio:1/1; object-fit:cover; filter:grayscale(0.5); }
+  .speaker .name{ font-family:var(--display); font-weight:600; margin-top:12px; font-size:0.95rem; }
+  .speaker .role{ color:var(--steel); font-size:0.82rem; margin-top:3px; }
+  @media (max-width:820px){ .speakers-grid{ grid-template-columns:repeat(2,1fr); } }
+
+  /* ---------- Mentorship callout ---------- */
+  .callout{
+    background:var(--bg);
+    border:1px solid var(--line);
+    border-left:4px solid var(--green);
+    padding:clamp(28px,4vw,44px);
+    display:grid; grid-template-columns:1fr auto; gap:24px; align-items:center;
+  }
+  .callout h3{ font-family:var(--display); font-weight:600; font-size:1.3rem; }
+  .callout p{ color:var(--steel); margin-top:10px; max-width:56ch; }
+  @media (max-width:700px){ .callout{ grid-template-columns:1fr; } }
+
+  /* ---------- Registration / contacts ---------- */
+  .reg-grid{ display:grid; grid-template-columns:1fr 1fr; gap:48px; }
+  .fee-box{
+    background:var(--panel); color:var(--panel-text); padding:32px; 
+  }
+  .fee-box .amount{ font-family:var(--display); font-size:2.6rem; font-weight:700; color:var(--ember); }
+  .fee-box .amount span{ font-size:1rem; font-family:var(--mono); color:rgba(244,243,239,0.6); margin-left:8px; }
+  .fee-box p{ margin-top:14px; color:rgba(244,243,239,0.7); font-size:0.9rem; }
+  .contact-list{ display:flex; flex-direction:column; gap:20px; }
+  .contact-item{ border-top:1px solid var(--line); padding-top:16px; }
+  .contact-item .org{ font-family:var(--mono); font-size:0.72rem; color:var(--steel); text-transform:uppercase; letter-spacing:0.08em; }
+  .contact-item .person{ font-family:var(--display); font-weight:600; margin-top:6px; }
+  .contact-item .detail{ color:var(--steel); font-size:0.9rem; margin-top:4px; }
+  @media (max-width:860px){ .reg-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- Footer ---------- */
+  footer{ background:var(--panel); color:rgba(244,243,239,0.6); padding:44px var(--pad); }
+  .footer__inner{ max-width:var(--max); margin:0 auto; display:flex; justify-content:space-between; flex-wrap:wrap; gap:16px; font-size:0.85rem; }
+  .footer__inner strong{ color:var(--panel-text); }
+</style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <div class="nav__logo">Green<span>Iron</span> Workshop 2026</div>
+      <div class="nav__links">
+        <a href="#overview">Overview</a>
+        <a href="#programme">Programme</a>
+        <a href="#mentorship">Mentorship</a>
+        <a href="#register">Register</a>
+      </div>
+      <a class="nav__cta" href="#register">Register</a>
+    </div>
+  </nav>
+  <div class="smelt"></div>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero__bg"></div>
+    <div class="hero__content">
+      <div class="hero__eyebrow">China International Steel Week · Shanghai</div>
+      <h1>First Australia–China Green Iron Technology Workshop</h1>
+      <p class="hero__sub">Bringing together leading researchers, industry and emerging talent from Australia, China and beyond to accelerate green ironmaking and low-carbon metallurgy.</p>
+      <div class="hero__meta">
+        <div><span class="label">Date</span>19 September 2026</div>
+        <div><span class="label">Venue</span>Shanghai Fuyue Hotel</div>
+        <div><span class="label">Language</span>Chinese &amp; English, interpreted</div>
+        <div><span class="label">Fee</span>RMB 2,000 / person</div>
+      </div>
+      <div class="hero__actions">
+        <a class="btn btn--solid" href="#register">Register now</a>
+        <a class="btn" href="#programme">View programme</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- OVERVIEW -->
+  <section id="overview">
+    <div class="wrap overview">
+      <div class="overview__text">
+        <div class="eyebrow">About the workshop</div>
+        <h2 style="font-family:var(--display); font-weight:600; font-size:clamp(1.6rem,3vw,2.2rem); margin-top:14px;">A shared response to the global shift toward low-carbon steel</h2>
+        <p>China and Australia hold strong complementary strengths in ironmaking and steelmaking, iron ore resources, renewable energy and research capability. Following a <em>start high, stay focused</em> approach, this first Workshop and the associated Green Iron Young Scientists Mentorship Program bring together academicians, industry leaders and emerging researchers to focus on green ironmaking, low-carbon metallurgy, resource efficiency and industry transformation.</p>
+        <p>Co-convened by Academician Xinping Mao and Professor Jianliang Zhang (China) and Professor Yansong Shen, FTSE (Australia), the Workshop is intended to alternate between Australia and China in future years.</p>
+      </div>
+      <div class="overview__figure">
+        <img src="https://images.unsplash.com/photo-1590959651373-a3db0f38c961?auto=format&fit=crop&w=1000&q=80" alt="Steel and iron industry facility">
+        <div class="overview__tag">CHINA INTERNATIONAL STEEL WEEK · SHANGHAI</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAM HIGHLIGHTS -->
+  <section style="background:#EDEAE2;">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Program highlights</div>
+        <h2>Three core components</h2>
+      </div>
+      <div class="highlights">
+        <div class="highlight-card">
+          <div class="num">01</div>
+          <h3>Keynotes &amp; discussion</h3>
+          <p>High-level presentations from distinguished Academy Fellows and experts in green iron and low-carbon metallurgy.</p>
+        </div>
+        <div class="highlight-card">
+          <div class="num">02</div>
+          <h3>Young Scientists Mentorship</h3>
+          <p>An open call and selection process pairing early- and mid-career researchers with senior mentors from both countries.</p>
+        </div>
+        <div class="highlight-card">
+          <div class="num">03</div>
+          <h3>Partnership announcements</h3>
+          <p>Signing of the Australia–China Green Iron Research Platform MoU, launch of the <em>Iron &amp; Steel</em> Green and Low-Carbon Special Issue, and academic honours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEY DATES -->
+  <section class="dates-panel">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Timeline</div>
+        <h2>Key dates</h2>
+      </div>
+      <div class="date-list">
+        <div class="date-row"><span class="what">Green Iron Young Scientists Mentorship Program registration</span><span class="when">10 September 2026</span></div>
+        <div class="date-row"><span class="what">Workshop registration</span><span class="when">15 September 2026</span></div>
+        <div class="date-row"><span class="what">Sponsorship and advertising enquiries</span><span class="when">15 September 2026</span></div>
+        <div class="date-row"><span class="what">Registration at venue</span><span class="when">18 September 2026</span></div>
+        <div class="date-row"><span class="what">Workshop &amp; Mentorship Program event day</span><span class="when">19 September 2026</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAMME -->
+  <section id="programme">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Preliminary programme · 19 September 2026</div>
+        <h2>Full-day schedule</h2>
+        <p>Shanghai Fuyue Hotel. Subject to final confirmation.</p>
+      </div>
+      <div class="timeline">
+        <div class="t-row"><div class="time">08:30–08:50</div><div class="session">Opening Session</div><div class="details">Welcome by the host, introduction of guests and program overview; remarks by host/advisory organisations.</div></div>
+        <div class="t-row"><div class="time">08:50–09:40</div><div class="session">Academy Fellow Keynote I</div><div class="details">Two Chinese and Australian Academy Fellows, 25 minutes each.</div></div>
+        <div class="t-row"><div class="time">09:40–09:55</div><div class="session">Morning Tea</div><div class="details">Refreshments and networking.</div></div>
+        <div class="t-row"><div class="time">09:55–10:45</div><div class="session">Academy Fellow Keynote II</div><div class="details">Two Chinese and Australian Academy Fellows, 25 minutes each.</div></div>
+        <div class="t-row"><div class="time">10:45–11:30</div><div class="session">Roundtable I</div><div class="details">International collaboration and development in green iron.</div></div>
+        <div class="t-row highlight"><div class="time">11:30–11:50</div><div class="session">Announcement I</div><div class="details">Green Iron Research Platform MoU signing and UNSW green iron academic honours.</div></div>
+        <div class="t-row"><div class="time">11:50–13:15</div><div class="session">Lunch &amp; Networking</div><div class="details">Informal networking.</div></div>
+        <div class="t-row"><div class="time">13:15–14:05</div><div class="session">Academy Fellow Keynote III</div><div class="details">Two Chinese and Australian Academy Fellows, 25 minutes each.</div></div>
+        <div class="t-row"><div class="time">14:05–15:05</div><div class="session">Expert Keynote I</div><div class="details">Three experts, 20 minutes each.</div></div>
+        <div class="t-row"><div class="time">15:05–15:20</div><div class="session">Afternoon Tea</div><div class="details">Refreshments and networking.</div></div>
+        <div class="t-row"><div class="time">15:20–16:20</div><div class="session">Expert Keynote II</div><div class="details">Three experts, 20 minutes each.</div></div>
+        <div class="t-row"><div class="time">16:20–17:05</div><div class="session">Roundtable II</div><div class="details">Technology frontiers in green iron and low-carbon metallurgy.</div></div>
+        <div class="t-row highlight"><div class="time">17:05–17:25</div><div class="session">Announcement II</div><div class="details">Mentorship pairings announced; launch of the <em>Iron &amp; Steel</em> Green and Low-Carbon Special Issue.</div></div>
+        <div class="t-row"><div class="time">17:25–17:30</div><div class="session">Closing Remarks</div><div class="details">Summary and closing remarks.</div></div>
+        <div class="t-row"><div class="time">18:00–20:00</div><div class="session">Welcome Dinner</div><div class="details">Welcome dinner and networking.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPEAKERS -->
+  <section style="background:#EDEAE2;">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Opening remarks &amp; keynotes</div>
+        <h2>Speakers</h2>
+      </div>
+      <div class="speakers-grid">
+        <div class="speaker">
+          <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=400&q=80" alt="">
+          <div class="name">Mr Yiren Li</div>
+          <div class="role">Vice President, CISA</div>
+        </div>
+        <div class="speaker">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80" alt="">
+          <div class="name">Mr Zhiling Tian</div>
+          <div class="role">Executive Vice President, CSM</div>
+        </div>
+        <div class="speaker">
+          <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80" alt="">
+          <div class="name">Prof. Julien Epps</div>
+          <div class="role">Dean of Engineering, UNSW</div>
+        </div>
+        <div class="speaker">
+          <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?auto=format&fit=crop&w=400&q=80" alt="">
+          <div class="name">Mr Edwin Basson</div>
+          <div class="role">Director General, World Steel Association</div>
+        </div>
+      </div>
+      <p style="margin-top:24px; color:var(--steel); font-size:0.92rem;">Keynote speakers also include Academicians Xinping Mao, Tao Jiang and Hongxia Li, and Professors Aibing Yu, Dongke Zhang and Yansong Shen.</p>
+    </div>
+  </section>
+
+  <!-- MENTORSHIP CALLOUT -->
+  <section id="mentorship">
+    <div class="wrap">
+      <div class="callout">
+        <div>
+          <div class="eyebrow">Appendix I</div>
+          <h3>Green Iron Young Scientists Mentorship Program</h3>
+          <p>Open to outstanding early- and mid-career researchers from Australia and China. Selected participants are matched with senior academicians, Fellows and experts based on research interests. Applications, including a Young Researcher Information Form, are due <strong>10 September 2026</strong>.</p>
+        </div>
+        <a class="btn btn--solid" style="color:var(--bg); border-color:var(--rust);" href="mailto:ting.shi1@unsw.edu.au">Apply by email</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORGANISATIONS -->
+  <section style="background:#EDEAE2;">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Organisations</div>
+        <h2>Hosts, advisors &amp; supporters</h2>
+      </div>
+      <div class="org-tiers">
+        <div class="org-tier">
+          <div class="tier-label">Joint hosts</div>
+          <div class="tier-names">UNSW Sydney · MC-CCPIT (Metallurgical Industry Branch) · University of Science and Technology Beijing</div>
+        </div>
+        <div class="org-tier">
+          <div class="tier-label">Advisory support</div>
+          <div class="tier-names">China Iron and Steel Association (CISA) · Chinese Society for Metals (CSM) · World Steel Association</div>
+        </div>
+        <div class="org-tier">
+          <div class="tier-label">Supported by</div>
+          <div class="tier-names">China Baowu · Rio Tinto</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGISTRATION -->
+  <section id="register">
+    <div class="wrap reg-grid">
+      <div>
+        <div class="section-head" style="margin-bottom:24px;">
+          <div class="eyebrow">Registration</div>
+          <h2>Join the workshop</h2>
+          <p>Send the completed registration form to <a href="mailto:conference@mcchina.org.cn" style="text-decoration:underline;">conference@mcchina.org.cn</a> by 15 September 2026, or register via the QR code provided in the event notice. Participants cover their own travel and accommodation.</p>
+        </div>
+        <div class="fee-box">
+          <div class="amount">RMB 2,000<span>per person</span></div>
+          <p>Payment reference must include "Australia–China Green Iron." Recommended hotels near the venue range from RMB 380–630 per room per night.</p>
+        </div>
+      </div>
+      <div class="contact-list">
+        <div class="contact-item">
+          <div class="org">MC-CCPIT</div>
+          <div class="person">Ning Mao</div>
+          <div class="detail">+86 138 1050 4500</div>
+        </div>
+        <div class="contact-item">
+          <div class="org">MC-CCPIT</div>
+          <div class="person">Zan Song</div>
+          <div class="detail">+86 185 0008 7307</div>
+        </div>
+        <div class="contact-item">
+          <div class="org">UNSW Sydney</div>
+          <div class="person">Ziguang Zhao</div>
+          <div class="detail">ziguang.zhao@unsw.edu.au · +61 415 956 868</div>
+        </div>
+        <div class="contact-item">
+          <div class="org">UNSW Sydney — Mentorship Program</div>
+          <div class="person">Ting Shi</div>
+          <div class="detail">ting.shi1@unsw.edu.au · +86 131 6233 6051</div>
+        </div>
+        <div class="contact-item">
+          <div class="org">University of Science and Technology Beijing</div>
+          <div class="person">Kejiang Li</div>
+          <div class="detail">likejiang@ustb.edu.cn · +86 13401183754</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="smelt"></div>
+  <footer>
+    <div class="footer__inner">
+      <div><strong>First Australia–China Green Iron Technology Workshop</strong> · 19 September 2026 · Shanghai Fuyue Hotel</div>
+      <div>Jointly hosted by UNSW Sydney, MC-CCPIT and USTB</div>
+    </div>
+  </footer>
+
+</body>
+</html>
